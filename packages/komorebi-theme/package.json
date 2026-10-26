@@ -16,7 +16,7 @@
     "./layouts": "./src/runtime/layouts/layouts.ts"
   },
   "peerDependencies": {
-    "astro": "^6.0.0"
+    "astro": "^7.0.0"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.18",
