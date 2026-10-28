@@ -110,7 +110,10 @@ export function createKomorebiUnoOptions(
           img: {
             'margin-top': '2rem',
             'margin-bottom': '2rem',
-            width: '100%',
+            // 用 max-width 而非 width：小图保持原始尺寸，大图缩放到容器宽度
+            'max-width': '100%',
+            height: 'auto',
+            'margin-inline': 'auto',
             'border-radius': '24px',
             border: '1px solid var(--color-img-border)',
             'box-shadow': '0 24px 60px -36px var(--color-img-shadow)',

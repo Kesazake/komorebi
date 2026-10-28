@@ -223,8 +223,15 @@ export default function komorebi(
             mdx(),
           ],
           markdown: {
+            // 双主题输出：每个 token 同时带 --shiki-light / --shiki-dark，
+            // 由 global.css 按 <html data-palette> 选择使用哪一组。
+            // shiki 的颜色写在内联 style 上，无法用普通 CSS 变量覆盖。
             shikiConfig: {
-              theme: 'github-light',
+              themes: {
+                light: 'github-light',
+                dark: 'github-dark',
+              },
+              defaultColor: false,
             },
           },
           vite: {

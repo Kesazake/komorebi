@@ -129,3 +129,30 @@ video.komorebi-media__el {
   color: var(--color-text-subtle);
   text-align: center;
 }
+
+/* ────────────────────────────────────────────────────────────
+   代码块配色
+   shiki 双主题输出 --shiki-light / --shiki-dark 两组内联变量，
+   这里按 data-palette 选择。span 的背景保持透明，避免覆盖 pre 的底色。
+   ──────────────────────────────────────────────────────────── */
+
+/* 用 html body 提高特异性，压过 prose 的 `pre { color: inherit }` */
+html body .prose pre.astro-code,
+html body .prose pre.astro-code span {
+  color: var(--shiki-light);
+  background-color: var(--shiki-light-bg);
+}
+
+html body .prose pre.astro-code span {
+  background-color: transparent;
+}
+
+html:root[data-palette="moon"] body .prose pre.astro-code,
+html:root[data-palette="moon"] body .prose pre.astro-code span {
+  color: var(--shiki-dark);
+  background-color: var(--shiki-dark-bg);
+}
+
+html:root[data-palette="moon"] body .prose pre.astro-code span {
+  background-color: transparent;
+}
