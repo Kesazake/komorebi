@@ -7,6 +7,7 @@
 import { writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import mdx from '@astrojs/mdx';
 import UnoCSS from '@unocss/astro';
 import type { AstroIntegration } from 'astro';
 import type { DefaultTreeAdapterTypes } from 'parse5';
@@ -218,6 +219,8 @@ export default function komorebi(
             UnoCSS(
               createKomorebiUnoOptions(themeContentGlobs, indicatorSafelist),
             ),
+            // 内置 MDX 支持，使 .mdx 文章可直接使用组件与本地媒体导入
+            mdx(),
           ],
           markdown: {
             shikiConfig: {
