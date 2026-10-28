@@ -6,4 +6,5 @@ export default defineConfig({
   repositoryUrl: 'https://github.com/KeqingMoe/komorebi',
   // 第一个为默认配色，>1 个时渲染切换开关
   palette: ['moon', 'sun'],
+  customCss: ['./src/styles/fonts.css'],
 });

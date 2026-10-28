@@ -1,0 +1,160 @@
+/**
+ * 字体方案：宋体正文 + 文楷摘要
+ *
+ * 来源（官方发布，SIL Open Font License 1.1）：
+ *   Noto Serif SC  https://github.com/notofonts/noto-cjk  (Serif2.003)
+ *   LXGW WenKai    https://github.com/lxgw/LxgwWenKai     (v1.530)
+ *
+ * 子集化：仅保留 GB2312 一级汉字（3755 字）+ 拉丁 + 标点。
+ * 使用 fontTools 生成，命令记录在下方。
+ *
+ * 三套字体，分层使用：
+ *   readable → 思源宋体，正文（16px / 1.75）
+ *   copy     → 霞鹜文楷，摘要与引语
+ *   brand    → Georgia，站点标题
+ *
+ * 每种字体按 unicode-range 切成两片：
+ *   latin       U+0000-00FF, U+2000-206F, U+3000-303F, U+FF00-FFEF
+ *   cjk-common  U+4E00-9FFF
+ * 浏览器只请求实际用到的分片。
+ *
+ * Noto Serif SC / LXGW WenKai 均为 SIL Open Font License 1.1。
+ * 许可证全文见 public/fonts/OFL.txt。
+ *
+ * 重新生成（需 fonttools + brotli）：
+ *   pyftsubset NotoSerifSC-Regular.otf \
+ *     --unicodes-file=gb2312.txt --flavor=woff2 \
+ *     --output-file=noto-serif-sc-400-cjk-common.woff2 \
+ *     --layout-features='kern,liga,clig,calt,locl' --no-hinting --desubroutinize
+ */
+
+/* ── 思源宋体 400 ── */
+@font-face {
+  font-family: "Noto Serif SC";
+  src: url("/fonts/noto-serif-sc-400-latin.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+2000-206F, U+3000-303F, U+FF00-FFEF;
+}
+
+@font-face {
+  font-family: "Noto Serif SC";
+  src: url("/fonts/noto-serif-sc-400-cjk-common.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+4e00-9fff;
+}
+
+/* ── 思源宋体 600 ── */
+@font-face {
+  font-family: "Noto Serif SC";
+  src: url("/fonts/noto-serif-sc-600-latin.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00ff, U+2000-206f, U+3000-303f, U+ff00-ffef;
+}
+
+@font-face {
+  font-family: "Noto Serif SC";
+  src: url("/fonts/noto-serif-sc-600-cjk-common.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+4e00-9fff;
+}
+
+/* ── 霞鹜文楷 Lite 400 ── */
+@font-face {
+  font-family: "LXGW WenKai Lite";
+  src: url("/fonts/lxgw-wenkai-latin.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00ff, U+2000-206f, U+3000-303f, U+ff00-ffef;
+}
+
+@font-face {
+  font-family: "LXGW WenKai Lite";
+  src: url("/fonts/lxgw-wenkai-cjk-common.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+4e00-9fff;
+}
+
+/* ════════════════════════════════════════════════════════════
+   应用
+   ════════════════════════════════════════════════════════════ */
+
+:root {
+  --font-readable:
+    "Noto Serif SC", ui-serif, Georgia, "Times New Roman", "Songti SC", serif;
+  --font-copy: "LXGW WenKai Lite", "Kaiti SC", "STKaiti", serif;
+  --font-brand: Georgia, serif;
+  --font-ui:
+    "Inter", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui,
+    -apple-system, sans-serif;
+}
+
+/* 正文：思源宋体 */
+html body {
+  font-family: var(--font-readable);
+  line-height: 1.75;
+}
+
+/* 标题：同样是宋体，但用 600 字重 */
+html body :where(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--font-readable);
+}
+
+/* 文章摘要：霞鹜文楷
+   首选语义 class（LatestPost / PostCard 已标注 .post-excerpt），
+   结构选择器作为兜底：上游若改动 class 名，仍能按 DOM 结构命中。 */
+html body .post-excerpt,
+html body a :where(h2 + p, h3 + p) {
+  font-family: var(--font-copy);
+  line-height: 1.6;
+}
+
+/* 站点标题：Georgia */
+html body :where(header a > span:first-child) {
+  font-family: var(--font-brand);
+}
+
+/* UI 元素保持无衬线（导航、日期、分页、TOC） */
+html body
+  :where(
+    nav,
+    nav a,
+    header nav,
+    time,
+    .post-meta,
+    .post-meta__label,
+    .post-meta__value,
+    .pagination-link,
+    .pagination-page,
+    .pagination-gap,
+    .toc-link,
+    .toc-link__text,
+    .adjacent-edge__eyebrow,
+    button
+  ) {
+  font-family: var(--font-ui);
+}
+
+/* 代码保持等宽 */
+html body :where(code, pre, kbd, samp) {
+  font-family:
+    "Sarasa Mono SC", "Noto Sans Mono CJK SC", ui-monospace, SFMono-Regular,
+    Menlo, Monaco, Consolas, monospace;
+}
+
+/* 正文排版微调：宋体字面较小，需要略大的行高与更紧的字距 */
+html body .prose {
+  font-family: var(--font-readable);
+  line-height: 1.9;
+  letter-spacing: 0.01em;
+}
