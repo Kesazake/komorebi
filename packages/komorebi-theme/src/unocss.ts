@@ -110,8 +110,13 @@ export function createKomorebiUnoOptions(
           img: {
             'margin-top': '2rem',
             'margin-bottom': '2rem',
-            // 用 max-width 而非 width：小图保持原始尺寸，大图缩放到容器宽度
+            // 小图保持原始尺寸；大图同时受容器宽度和视口高度约束：
+            //   max-width  不超过正文容器
+            //   max-height 不超过视口高度的 75%，避免竖图/方图要滚动才能看全
+            // 用 svh 而非 vh，防止移动端地址栏伸缩导致图片高度抖动。
             'max-width': '100%',
+            'max-height': '75vh',
+            width: 'auto',
             height: 'auto',
             'margin-inline': 'auto',
             'border-radius': '24px',
