@@ -1,15 +1,24 @@
 ---
+import PaletteToggle from '../PaletteToggle.astro';
+
 interface NavLink {
   href: string;
   label: string;
   isActive: boolean;
 }
 
-interface Props {
-  navLinks: NavLink[];
+interface PaletteInfo {
+  current: string;
+  options: string[];
+  themeColors: Record<string, string>;
 }
 
-const { navLinks } = Astro.props as Props;
+interface Props {
+  navLinks: NavLink[];
+  palette?: PaletteInfo | undefined;
+}
+
+const { navLinks, palette } = Astro.props as Props;
 ---
 
 <div class="relative sm:hidden" data-mobile-menu>
@@ -28,7 +37,7 @@ const { navLinks } = Astro.props as Props;
 
   <nav
     aria-label="移动端主导航"
-    class="mobile-nav-panel absolute right-0 top-full z-20 mt-2 w-40 origin-top-right rounded-2xl border border-zinc-200/80 bg-white/92 p-2 text-sm font-medium text-zinc-600 shadow-lg shadow-rose-100/25 backdrop-blur-md"
+    class="mobile-nav-panel absolute right-0 top-full z-20 mt-2 w-44 origin-top-right rounded-2xl border border-zinc-200/80 bg-white/92 p-2 text-sm font-medium text-zinc-600 shadow-lg shadow-rose-100/25 backdrop-blur-md"
   >
     {
       navLinks.map(({ href, label, isActive }) => (
@@ -43,6 +52,18 @@ const { navLinks } = Astro.props as Props;
           {label}
         </a>
       ))
+    }
+    {
+      palette && palette.options.length > 1 && (
+        <div class="mt-1 border-t border-zinc-200/80 pt-1">
+          <PaletteToggle
+            current={palette.current}
+            options={palette.options}
+            themeColors={palette.themeColors}
+            variant="row"
+          />
+        </div>
+      )
     }
   </nav>
 </div>

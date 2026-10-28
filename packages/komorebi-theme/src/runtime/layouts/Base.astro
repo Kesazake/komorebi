@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import 'virtual:komorebi-theme/user-css';
+import PaletteScript from '../components/layout/PaletteScript.astro';
 import { siteLocale, sitePalette, siteTitle } from '../lib/site';
 
 interface Props {
@@ -14,6 +15,13 @@ const pageTitle = title ? `${title} · ${siteTitle}` : `${siteTitle} Blog`;
 <html lang={siteLocale} data-palette={sitePalette.name} class="scroll-smooth">
   <head>
     <meta charset="utf-8" />
+    {
+      sitePalette.options.length > 1 && (
+        <script is:inline>
+          {`(function(){try{var k="komorebi-palette";var s=localStorage.getItem(k);var o=${JSON.stringify(sitePalette.options)};if(s&&o.indexOf(s)>-1){document.documentElement.dataset.palette=s;var m=document.querySelector('meta[name="theme-color"]');var c=${JSON.stringify(sitePalette.themeColors)};if(m&&c[s])m.setAttribute("content",c[s]);}}catch(e){}})();`}
+        </script>
+      )
+    }
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     {
@@ -28,10 +36,14 @@ const pageTitle = title ? `${title} · ${siteTitle}` : `${siteTitle} Blog`;
     }
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="theme-color" content={sitePalette.themeColor} />
+    <meta
+      name="theme-color"
+      content={sitePalette.themeColors[sitePalette.name]}
+    />
     <title>{pageTitle}</title>
   </head>
   <body class="min-h-dvh flex flex-col">
     <slot />
+    {sitePalette.options.length > 1 && <PaletteScript />}
   </body>
 </html>

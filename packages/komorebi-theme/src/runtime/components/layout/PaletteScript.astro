@@ -1,0 +1,52 @@
+---
+/**
+ * 配色切换的运行时逻辑
+ *
+ * 独立成组件，由 Base.astro 引入一次，
+ * 避免脚本被塞进 MobileNav 的 <nav> 内部。
+ */
+---
+
+<script is:inline data-astro-rerun>
+  (() => {
+    const STORAGE_KEY = 'komorebi-palette';
+
+    for (const btn of document.querySelectorAll('[data-palette-toggle]')) {
+      if (btn.dataset.bound === 'true') continue;
+      btn.dataset.bound = 'true';
+
+      const options = JSON.parse(btn.dataset.palettes || '[]');
+      const themeColors = JSON.parse(btn.dataset.themeColors || '{}');
+      if (options.length < 2) continue;
+
+      btn.addEventListener('click', () => {
+        const root = document.documentElement;
+        const current = root.dataset.palette || options[0];
+        const next = options[(options.indexOf(current) + 1) % options.length];
+
+        root.dataset.palette = next;
+
+        const meta = document.querySelector('meta[name="theme-color"]');
+        if (meta && themeColors[next]) {
+          meta.setAttribute('content', themeColors[next]);
+        }
+
+        // 同步所有开关的文案与无障碍标签（桌面 / 移动端各一个）
+        const labels = { sun: '木漏れ日', moon: '木漏れ月' };
+        const label = labels[next] || next;
+        for (const el of document.querySelectorAll('[data-palette-toggle]')) {
+          el.setAttribute('aria-label', `切换配色（当前：${label}）`);
+          el.setAttribute('title', `当前配色：${label}`);
+          const text = el.querySelector('[data-palette-label]');
+          if (text) text.textContent = label;
+        }
+
+        try {
+          localStorage.setItem(STORAGE_KEY, next);
+        } catch {
+          /* 隐私模式下不可用，忽略 */
+        }
+      });
+    }
+  })();
+</script>

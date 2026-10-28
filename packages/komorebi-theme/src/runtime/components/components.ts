@@ -9,6 +9,7 @@ export { default as LatestPost } from './home/LatestPost.astro';
 export { default as LatestPosts } from './home/LatestPosts.astro';
 export { default as DesktopNav } from './layout/Nav/DesktopNav.astro';
 export { default as MobileNav } from './layout/Nav/MobileNav.astro';
+export { default as PaletteToggle } from './layout/PaletteToggle.astro';
 export { default as SiteFooter } from './layout/SiteFooter.astro';
 export { default as SiteHeader } from './layout/SiteHeader.astro';
 export { default as AdjacentNav } from './post/AdjacentNav.astro';

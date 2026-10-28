@@ -1,7 +1,8 @@
 ---
-import { siteNav } from '../../lib/site';
+import { siteNav, sitePalette } from '../../lib/site';
 import DesktopNav from './Nav/DesktopNav.astro';
 import MobileNav from './Nav/MobileNav.astro';
+import PaletteToggle from './PaletteToggle.astro';
 
 interface NavLink {
   href: string;
@@ -45,9 +46,27 @@ const { siteTitle, tagline } = Astro.props as Props;
         </span>
       </a>
 
-      <MobileNav {navLinks} />
+      <MobileNav
+        {navLinks}
+        palette={{
+          current: sitePalette.name,
+          options: sitePalette.options,
+          themeColors: sitePalette.themeColors,
+        }}
+      />
     </div>
 
-    <DesktopNav {navLinks} />
+    <div class="hidden items-center gap-2 sm:flex">
+      <DesktopNav {navLinks} />
+      {
+        sitePalette.options.length > 1 && (
+          <PaletteToggle
+            current={sitePalette.name}
+            options={sitePalette.options}
+            themeColors={sitePalette.themeColors}
+          />
+        )
+      }
+    </div>
   </div>
 </header>

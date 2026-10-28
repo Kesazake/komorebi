@@ -44,10 +44,12 @@ export type CommentsConfig = false | GiscusOptions;
 export type KomorebiPalette = 'sun' | 'moon';
 
 export interface ResolvedKomorebiPalette {
-  /** 写入 <html data-palette>，对应 palettes.css 中的选择器 */
+  /** 当前生效的 palette，写入 <html data-palette> */
   name: KomorebiPalette;
-  /** <meta name="theme-color">，浏览器地址栏颜色 */
-  themeColor: string;
+  /** 可切换的 palette 列表；长度 > 1 时渲染切换开关 */
+  options: KomorebiPalette[];
+  /** 各 palette 对应的 <meta name="theme-color"> */
+  themeColors: Record<string, string>;
 }
 
 export interface KomorebiThemeOptions {
@@ -74,8 +76,12 @@ export interface KomorebiThemeOptions {
   customCss?: string[];
   comments?: CommentsConfig;
   labels?: Partial<KomorebiThemeLabels>;
-  /** 配色方案，默认 'sun' */
-  palette?: KomorebiPalette;
+  /**
+   * 配色方案。
+   * - 传单个值：固定该配色
+   * - 传数组：第一个为默认值，长度 > 1 时渲染切换开关
+   */
+  palette?: KomorebiPalette | KomorebiPalette[];
   /** 覆盖 <meta name="theme-color">，默认由 palette 决定 */
   themeColor?: string;
 }
@@ -205,11 +211,23 @@ export function resolveThemeOptions(
 function resolvePalette(
   options: KomorebiThemeOptions,
 ): ResolvedKomorebiPalette {
-  const name = options.palette ?? 'sun';
-  return {
-    name,
-    themeColor: options.themeColor ?? paletteThemeColors[name],
-  };
+  const raw = options.palette;
+  const list: KomorebiPalette[] = Array.isArray(raw)
+    ? raw.length > 0
+      ? raw
+      : ['sun']
+    : raw
+      ? [raw]
+      : ['sun'];
+
+  const name = list[0] ?? 'sun';
+
+  const themeColors: Record<string, string> = { ...paletteThemeColors };
+  if (options.themeColor) {
+    themeColors[name] = options.themeColor;
+  }
+
+  return { name, options: list, themeColors };
 }
 
 function resolveComments(
