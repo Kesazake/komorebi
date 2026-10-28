@@ -23,31 +23,31 @@ draft: true
 
 克隆项目原始仓库  
 
-```(bash)
+```bash
 git clone https://github.com/CuteLeaf/Firefly.git
 ```
 
 绑定自己的仓库  
 
-```(bash)
+```bash
 git remote set-url origin (自己的仓库地址)
 ```
 
 暂存修改
 
-```(bash)
+```bash
 git add .
 ```
 
 提交
 
-```(bash)
+```bash
 git commit -m "(提交信息)"
 ```
 
 推送
 
-```(bash)
+```bash
 git push -u origin main  # 首次
 git push                 # 后续
 ```

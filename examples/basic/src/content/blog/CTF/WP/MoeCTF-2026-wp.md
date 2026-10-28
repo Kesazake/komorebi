@@ -249,7 +249,7 @@ QQ 空间只有一条留言，看起来没什么信息。
 
 把内容作为 HTML 复制下来，并且去掉 “快来抢沙发” ，可以得到一段零宽字符隐写的数据。
 
-```HTML
+```html
 &zwnj;&zwnj;&zwnj;&zwnj;&zwj;&#xFEFF;&zwnj;&zwnj;&zwnj;&zwnj;&zwnj;&zwnj;&zwj;&#x202C;&zwnj;&zwj;&zwnj;&zwnj;&zwnj;&zwnj;&zwj;&#xFEFF;&zwnj;&#x202C;&zwnj;&zwnj;&zwnj;&zwnj;&zwj;&#xFEFF;&zwj;&zwnj;&zwnj;&zwnj;&zwnj;&zwnj;&zwnj;&#xFEFF;&zwnj;&#x202C;&zwnj;&zwnj;&zwnj;&zwnj;&zwnj;&#xFEFF;&#x202C;&#x202C;&zwnj;&zwnj;&zwnj;&zwnj;&zwnj;&#x202C;&zwnj;&zwnj;&zwnj;&zwnj;&zwnj;&zwnj;&zwj;&#x202C;&zwnj;&#xFEFF;&zwnj;&zwnj;&zwnj;&zwnj;&zwj;&#x202C;&#x202C;&#xFEFF;&zwnj;&zwnj;&zwnj;&zwnj;&zwj;&zwnj;&zwnj;&#x202C;&zwnj;&zwnj;&zwnj;&zwnj;&zwnj;&#xFEFF;&zwnj;&#x202C;&zwnj;&zwnj;&zwnj;&zwnj;&zwj;&zwnj;&#xFEFF;&zwj;&zwnj;&zwnj;&zwnj;&zwnj;&zwnj;&#xFEFF;&zwnj;&#x202C;&zwnj;&zwnj;&zwnj;&zwnj;&zwj;&#xFEFF;&#x202C;&zwnj;&zwnj;&zwnj;&zwnj;&zwnj;&zwj;&#x202C;&zwj;&#x202C;&zwnj;&zwnj;&zwnj;&zwnj;&zwj;&#x202C;&zwnj;&#x202C;&zwnj;&zwnj;&zwnj;&zwnj;&zwnj;&#xFEFF;&zwnj;&#x202C;&zwnj;&zwnj;&zwnj;&zwnj;&zwj;&zwj;&#x202C;&#x202C;&zwnj;&zwnj;&zwnj;&zwnj;&zwj;&#x202C;&zwj;&#x202C;&zwnj;&zwnj;&zwnj;&zwnj;&zwj;&zwnj;&#xFEFF;&zwj;&zwnj;&zwnj;&zwnj;&zwnj;&zwj;&zwnj;&#x202C;&zwnj;&zwnj;&zwnj;&zwnj;&zwnj;&zwj;&zwnj;&#xFEFF;&zwj;&zwnj;&zwnj;&zwnj;&zwnj;&zwj;&#xFEFF;&#x202C;&zwnj;&zwnj;&zwnj;&zwnj;&zwnj;&zwnj;&zwnj;&#x202C;&#x202C;&zwnj;&zwnj;&zwnj;&zwnj;&zwj;&#x202C;&#x202C;&zwnj;&zwnj;&zwnj;&zwnj;&zwnj;&zwj;&#x202C;&#x202C;&zwj;&zwnj;&zwnj;&zwnj;&zwnj;&zwj;&#x202C;&#xFEFF;&#x202C;&zwnj;&zwnj;&zwnj;&zwnj;&zwj;&#xFEFF;&zwj;&zwnj;&zwnj;&zwnj;&zwnj;&zwnj;&zwnj;&#x202C;&zwnj;&zwnj;&zwnj;&zwnj;&zwnj;&zwnj;&zwnj;&#xFEFF;&#x202C;&#x202C;&zwnj;&zwnj;&zwnj;&zwnj;&zwnj;&#x202C;&zwnj;&zwnj;&zwnj;&zwnj;&zwnj;&zwnj;&zwj;&#xFEFF;&zwnj;&#xFEFF;&zwnj;&zwnj;&zwnj;&zwnj;&zwj;&#x202C;&zwj;&zwj;&zwnj;&zwnj;&zwnj;&zwnj;&zwj;&#x202C;&zwj;&zwj;&zwnj;&zwnj;&zwnj;&zwnj;&zwnj;&#x202C;&zwnj;&zwnj;&zwnj;&zwnj;&zwnj;&zwnj;&zwj;&#x202C;&#xFEFF;&zwj;&zwnj;&zwnj;&zwnj;&zwnj;&zwj;&#x202C;&zwj;&zwj;
 ```
 
@@ -409,7 +409,7 @@ flag : moectf{wh3re_1s_my_f14g}
 
 附件的内容如下。
 
-```TXT
+```txt
 #! /usr/bin/env ruby 			    
 #|	
 x=""""     		    	
@@ -570,7 +570,7 @@ print('part1: mptnn__o0_!g1f')
 
 整理一下。
 
-```TXT
+```txt
 part1: mptnn__o0_!g1f
 part2: o0_!g1fel1_un1
 part3: el1_un1cys74_l
@@ -584,7 +584,7 @@ part7: {0u4s3mptnn__
 
 但是手动加上 flag 头之后提交却不对。观察所有 part ，发现每一个 part 的前 7 个字符是上一个 part 的结尾。每个 part 只取前 7 个字符，发现是一个 7x7 方阵，而第一列正是 `moectf{`
 
-```TXT
+```txt
 part1: mptnn__
 part2: o0_!g1f
 part3: el1_un1
@@ -607,7 +607,7 @@ flag : moectf{p0lygl0t_1s_fun!\_7_l4ngu4g3s_1n_0n3_f1l3}
 
 附件如下。
 
-```TXT
+```txt
 👄👱👞👱👑👢🐨👤👍👥👚🐫👛👏🐹👫👙👎👁🐪👜👡👉👭👋🐽👟👎👉🐼👁👍👈👣👑👧👋👢👫🐾👐👥👍🐻👜🐽👁👑👋🐾👑👀👜🐿🐸👱👈👱👉👬👑👢👌🐨👎🐽👑👋👅👱👑👫👌🐻👍👨👅👱👑👭👈👱👁🐩👆🐼👌👰👍🐼👌🐫👋🐼🐽👨👈👎👫👤👙🐪👀🐴
 ```
 
@@ -841,7 +841,7 @@ Date:   Sat Jul 4 23:30:56 2026 +0800
 
 线索指向了暂存区。`git status` 可以查看当前的暂存区。
 
-```zhs
+```zsh
 % git status
 
 On branch master
@@ -944,7 +944,7 @@ while list(WORK.glob("*.7z")) or list(WORK.glob("*.zip")) or list(WORK.glob("*.t
 这之后我花费了大量的时间尝试寻找各种密码，但是都失败了。  
 最后我忽然想到，如果密码是中文，那么输入的时候或许会存在跨平台问题。从 Windows 切换到 Linux / macOS 或许会有其他的结果。
 
-```zhs
+```zsh
 brew install snow
 ```
 
@@ -1172,7 +1172,7 @@ EOCDR found ( 1 248101)...
 
 尝试解压。
 
-```zhs
+```zsh
 % unzip fix.zip
 
 Archive:  fix.zip
@@ -1798,7 +1798,7 @@ root@16d9317c659c:/home#
 
 提示查看缓存。在缓存目录可以发现 `hint2.txt` ，提示查看隐藏的文件夹 `.system` ，而 `.system` 目录下有一个 `cache_meta.log` ，尝试直接查看但是输出了乱码。从开头来看应该是一个 PNG 。
 
-```zhs
+```zsh
 root@16d9317c659c:/home# ls -la /var/cache
 
 total 36

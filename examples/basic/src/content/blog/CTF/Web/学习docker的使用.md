@@ -30,7 +30,7 @@ Pillow
 
 `Dockerfile` Docker 镜像的构建说明书，告诉 Docker 打包服务。  
 
-```Dockerfile
+```docker
 # 基础镜像：一个精简版 Linux + Python 3.11
 FROM python:3.11-slim
 
@@ -171,7 +171,7 @@ docker 推送到仓库时，镜像名必须包含仓库地址和用户名，否�
 
 Docker 镜像是由一系列只读的层堆叠起来的，每一层记录了对文件系统的一次改动。容器就是启动的时候添加在镜像最上层的可写的层。  
 
-```Dockerfile
+```docker
 FROM python:3.11-slim      # 层 1：基础镜像（本身也由多层组成）
 RUN apt-get update ...     # 层 2：安装系统工具
 RUN pip install ...        # 层 3：安装 Pillow
