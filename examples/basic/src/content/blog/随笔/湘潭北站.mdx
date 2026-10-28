@@ -11,9 +11,11 @@ licenseName: "CC BY-NC-SA 4.0"
 draft: false
 ---
 
-import video1 from './湘潭北站.assets/黄色鹦鹉.mp4';
-import video2 from './湘潭北站.assets/你会说话吗？.mp4';
+import { Video, Audio } from 'komorebi-theme/components';
+import yellow_parrot from './湘潭北站.assets/黄色鹦鹉.mp4';
+import can_you_speak from './湘潭北站.assets/你会说话吗？.mp4';
 
+![スキマおばけにご注意を](./AAACover/スキマおばけにご注意を.avif)
 封面图片：《[スキマおばけにご注意を](https://www.avogado6.com/diary2025?lightbox=dataItem-mlyrlr4j13)》&emsp;|&emsp;作者：アボガド6 (Avogado6)
 
 ---
@@ -118,19 +120,11 @@ LSJGP 说可以吃小炒，于是我们停下了。
 
 ![鹦鹉？](./湘潭北站.assets/鹦鹉？.jpg)  
 
-<video 
-  src={video1} 
-  controls 
-  class="w-3/5 max-w-[500px] rounded-lg mx-auto"
-></video>
+<Video src={yellow_parrot} caption="黄色鹦鹉" />
 
 很可爱的鸟，这个笼子里还有另外一只灰色的。  
 
-<video 
-  src={video2} 
-  controls 
-  class="w-3/5 max-w-[500px] rounded-lg mx-auto"
-></video>
+<Video src={can_you_speak} caption="你会说话吗？" />
 
 这真的是鹦鹉吗？为什么不学我说话啊？  
 后来时雨和我说，确实是鹦鹉，但是一般来说，中大型的鹦鹉才会说话，而且要经过训练才行。小型的一般是不会说话的。  

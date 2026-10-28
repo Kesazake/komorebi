@@ -13,6 +13,7 @@ licenseName: CC BY-NC-SA 4.0
 draft: false
 ---
 
+![ベーグル](./AAACover/ベーグル.avif)
 封面图片：《[ベーグル](https://www.avogado6.com/diary2025?lightbox=dataItem-mlyrlr3v8)》&emsp;|&emsp;作者：アボガド6 (Avogado6)
 
 ---

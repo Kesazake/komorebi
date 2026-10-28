@@ -10,8 +10,11 @@ category: 随笔
 licenseName: "CC BY-NC-SA 4.0"
 draft: false
 ---
-import audioFile from './无题.assets/Sacred_Play_Secret_Place.mp3';
 
+import { Video, Audio } from 'komorebi-theme/components';
+import Sacred_Play_Secret_Place from './无题.assets/Sacred_Play_Secret_Place.mp3';
+
+![Tear](./AAACover/Tear.avif)
 封面图片：《[Tear](https://www.avogado6.com/diary2025?lightbox=dataItem-mlyrlr3v9)》&emsp;|&emsp;作者：アボガド6 (Avogado6)
 
 ---
@@ -104,11 +107,7 @@ import audioFile from './无题.assets/Sacred_Play_Secret_Place.mp3';
 
 骑自行车回宿舍的路上，我带着耳机。当我骑到自行车道，耳机播放的是Sacred Play Secret Place.
 
-<audio 
-  src={audioFile} 
-  controls 
-  className="w-3/5 max-w-[500px] rounded-lg mx-auto"
-/>
+<Audio src={Sacred_Play_Secret_Place} caption="Sacred Play Secret Place"/>
 
 我很喜欢这首歌，它听起来很宁静。那一刻我好像被一种祥和的气氛包围，感到一种一切都有转机的安心。
 
