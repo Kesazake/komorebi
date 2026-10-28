@@ -1,6 +1,6 @@
 ---
 title: 我的第一篇文章
-published: 2026-01-02
+pubDate: 2026-01-02
 pinned: false
 description: 我的第一篇文章
 tags: [随笔]

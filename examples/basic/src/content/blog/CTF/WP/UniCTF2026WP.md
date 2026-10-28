@@ -1,6 +1,6 @@
 ---
 title: UniCTF2026WP
-published: 2026-02-02
+pubDate: 2026-02-02
 pinned: false
 description: 2026年UniCTF的赛后整理。
 tags:

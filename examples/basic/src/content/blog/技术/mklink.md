@@ -1,6 +1,6 @@
 ---
 title: 使用 mklink 释放 C 盘
-published: 2026-06-19
+pubDate: 2026-06-19
 pinned: false
 description: 解决 C 盘空间不足的一个可行办法
 tags: [技术]

@@ -1,7 +1,7 @@
 ---
 title: HTTP协议
-published: 2026-04-06
-updated: 2026-04-06
+pubDate: 2026-04-06
+updatedDate: 2026-04-06
 pinned: false
 description: HTTP协议到底是什么……
 tags: [CTF, Web, HTTP]

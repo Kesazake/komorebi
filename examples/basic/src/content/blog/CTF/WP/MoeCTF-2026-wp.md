@@ -1,6 +1,6 @@
 ---
 title: MoeCTF-2026-wp
-published: 2026-08-24
+pubDate: 2026-08-24
 pinned: false
 description: MoeCTF 2026 题解
 tags:

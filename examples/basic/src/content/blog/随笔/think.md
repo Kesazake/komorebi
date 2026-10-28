@@ -1,6 +1,6 @@
 ---
 title: think
-published: 2026-08-30
+pubDate: 2026-08-30
 pinned: false
 description: 一些思考。
 tags:

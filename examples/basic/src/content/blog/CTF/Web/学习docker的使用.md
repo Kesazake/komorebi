@@ -1,7 +1,7 @@
 ---
 title: 学习Docker的使用
-published: 2026-04-07
-updated: 2026-04-15
+pubDate: 2026-04-07
+updatedDate: 2026-04-15
 pinned: false
 description: Docker到底是什么……
 tags: [CTF, Web, Docker]

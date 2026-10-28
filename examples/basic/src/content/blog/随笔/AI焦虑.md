@@ -1,7 +1,7 @@
 ---
 title: AI 焦虑
-published: 2026-05-02
-updated: 2026-05-02
+pubDate: 2026-05-02
+updatedDate: 2026-05-02
 pinned: false
 image: ./AAACover/無.avif
 description: AI 时代下的 AI 焦虑

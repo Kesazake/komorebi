@@ -1,7 +1,7 @@
 ---
 title: CyberChef challenge
-published: 2026-03-05
-updated: 2026-03-29
+pubDate: 2026-03-05
+updatedDate: 2026-03-29
 pinned: false
 image: ./AAACover/ベーグル.avif
 description: CyberChef challenge系列挑战的解密配方

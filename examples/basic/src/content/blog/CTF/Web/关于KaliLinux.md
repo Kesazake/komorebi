@@ -1,7 +1,7 @@
 ---
 title: 关于 Kali Linux
-published: 2026-04-10
-updated: 2026-04-13
+pubDate: 2026-04-10
+updatedDate: 2026-04-13
 pinned: false
 description: Kali Linux到底怎么用啊……
 tags:

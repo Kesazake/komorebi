@@ -1,6 +1,6 @@
 ---
 title: AstrBot 的部署和配置
-published: 2026-06-19
+pubDate: 2026-06-19
 pinned: false
 description: 在服务器上部署配置一个 24 小时运行的 bot
 tags:

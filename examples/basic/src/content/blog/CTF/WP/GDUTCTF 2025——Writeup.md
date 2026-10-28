@@ -1,6 +1,6 @@
 ---
 title: GDUTCTF 2025——Writeup
-published: 2025-11-25
+pubDate: 2025-11-25
 pinned: false
 description: 2025年GDUTCTF的赛后整理。
 tags:

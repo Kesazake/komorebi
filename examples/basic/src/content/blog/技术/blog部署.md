@@ -1,6 +1,6 @@
 ---
 title: blog的部署
-published: 2026-04-06
+pubDate: 2026-04-06
 pinned: false
 description: blog的部署过程
 tags: [技术]
