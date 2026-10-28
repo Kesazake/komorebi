@@ -156,3 +156,15 @@ html:root[data-palette="moon"] body .prose pre.astro-code span {
 html:root[data-palette="moon"] body .prose pre.astro-code span {
   background-color: transparent;
 }
+
+/* ────────────────────────────────────────────────────────────
+   正文图片高度上限的渐进增强
+   svh（small viewport height）取移动端地址栏展开时的视口高度，
+   避免滚动时图片高度随地址栏伸缩抖动。不支持的浏览器忽略此行。
+   ──────────────────────────────────────────────────────────── */
+
+@supports (height: 100svh) {
+  .prose img {
+    max-height: 75svh;
+  }
+}
