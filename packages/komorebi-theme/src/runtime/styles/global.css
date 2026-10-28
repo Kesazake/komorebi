@@ -91,3 +91,41 @@ pre {
     radial-gradient(circle at top right, var(--color-glow-b), transparent 22%),
     linear-gradient(180deg, var(--color-bg-from), var(--color-bg-to));
 }
+
+/* ────────────────────────────────────────────────────────────
+   媒体组件（Video / Audio）
+   与 prose 中的 img 保持视觉一致：圆角、边框、阴影、间距
+   ──────────────────────────────────────────────────────────── */
+
+.komorebi-media {
+  margin-block: 2rem;
+}
+
+.komorebi-media__el {
+  display: block;
+  width: 100%;
+  border-radius: 24px;
+  border: 1px solid var(--color-img-border);
+  box-shadow: 0 24px 60px -36px var(--color-img-shadow);
+  background: var(--color-surface-subtle);
+}
+
+/* 视频需要限制高度，避免竖屏视频撑满屏幕 */
+video.komorebi-media__el {
+  max-height: 75vh;
+  object-fit: contain;
+}
+
+/* 音频播放器自带内边距，这里只保证高度紧凑 */
+.komorebi-media--audio .komorebi-media__el {
+  width: 100%;
+  border-radius: 16px;
+}
+
+.komorebi-media__caption {
+  margin-top: 0.75rem;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--color-text-subtle);
+  text-align: center;
+}

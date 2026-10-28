@@ -1,0 +1,64 @@
+---
+/**
+ * 媒体组件：音频
+ *
+ * 用于 MDX 文章中嵌入音频播放器。
+ * 自动套用与正文图片一致的圆角、边框、阴影与间距。
+ *
+ * 用法（MDX）：
+ *   import { Audio } from 'komorebi-theme/components';
+ *   import bgm from './assets/bgm.mp3';
+ *
+ *   <Audio src={bgm} />
+ *   <Audio src={bgm} caption="背景音乐 · 某专辑" />
+ */
+
+interface Props {
+  /** 音频地址，支持 import 导入的本地文件 */
+  src: string;
+  /** 图注，显示在媒体下方；也用于说明音频内容 */
+  caption?: string | undefined;
+  /** 控制条，默认显示 */
+  controls?: boolean | undefined;
+  /** 自动播放；浏览器要求同时 muted 才会生效 */
+  autoplay?: boolean | undefined;
+  /** 循环播放 */
+  loop?: boolean | undefined;
+  /** 静音 */
+  muted?: boolean | undefined;
+  /** 宽度，默认撑满容器 */
+  width?: string | undefined;
+  /** 额外的 class */
+  class?: string | undefined;
+}
+
+const {
+  src,
+  caption,
+  controls = true,
+  autoplay = false,
+  loop = false,
+  muted = false,
+  width,
+  class: className,
+} = Astro.props as Props;
+---
+
+<figure class:list={['komorebi-media', 'komorebi-media--audio', className]}>
+  <audio
+    class="komorebi-media__el"
+    src={src}
+    controls={controls}
+    autoplay={autoplay}
+    loop={loop}
+    muted={muted}
+    preload="metadata"
+    style={width ? `width:${width}` : undefined}
+  >
+  </audio>
+  {
+    caption && (
+      <figcaption class="komorebi-media__caption">{caption}</figcaption>
+    )
+  }
+</figure>
