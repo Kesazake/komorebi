@@ -54,12 +54,7 @@ const items = headings.filter(({ depth }) => depth >= 2 && depth <= 3);
     top: 0.15rem;
     bottom: 0.15rem;
     width: 1px;
-    background: linear-gradient(
-      180deg,
-      rgba(244, 63, 94, 0.12),
-      rgba(161, 161, 170, 0.2),
-      rgba(251, 191, 36, 0.1)
-    );
+    background: var(--color-toc-rail);
   }
 
   .toc-link {
@@ -71,7 +66,7 @@ const items = headings.filter(({ depth }) => depth >= 2 && depth <= 3);
     margin-left: calc(-1 * var(--toc-rail-offset));
     overflow: hidden;
     padding: 0.36rem 0.7rem 0.36rem calc(var(--toc-rail-offset) + 0.35rem);
-    color: rgba(82, 82, 91, 0.76);
+    color: var(--color-toc-text);
     font-size: 0.92rem;
     line-height: 1.42;
     transition: color 180ms ease;
@@ -84,11 +79,7 @@ const items = headings.filter(({ depth }) => depth >= 2 && depth <= 3);
     top: 0;
     bottom: 0;
     width: 100%;
-    background: linear-gradient(
-      90deg,
-      rgba(255, 223, 231, 0.96),
-      rgba(255, 239, 242, 0.72)
-    );
+    background: var(--color-toc-progress);
     transform: scaleX(var(--toc-progress));
     transform-origin: left center;
     transition: transform 140ms linear;
@@ -102,7 +93,11 @@ const items = headings.filter(({ depth }) => depth >= 2 && depth <= 3);
     top: 0;
     bottom: 0;
     width: 2px;
-    background: rgba(244, 63, 94, calc(0.08 + var(--toc-emphasis) * 0.78));
+    background: color-mix(
+      in srgb,
+      var(--color-toc-indicator) calc((0.08 + var(--toc-emphasis) * 0.78) * 100%),
+      transparent
+    );
     transition: background-color 140ms linear;
   }
 
@@ -111,14 +106,14 @@ const items = headings.filter(({ depth }) => depth >= 2 && depth <= 3);
     z-index: 1;
     color: color-mix(
       in srgb,
-      rgba(82, 82, 91, 0.8) calc(100% - var(--toc-emphasis) * 100%),
-      #be123c calc(var(--toc-emphasis) * 100%)
+      var(--color-toc-text) calc(100% - var(--toc-emphasis) * 100%),
+      var(--color-accent-ink) calc(var(--toc-emphasis) * 100%)
     );
     font-weight: calc(520 + var(--toc-emphasis) * 100);
   }
 
   .toc-link:hover {
-    color: #27272a;
+    color: var(--color-toc-hover);
   }
 
   .toc-item--nested .toc-link {
@@ -129,8 +124,8 @@ const items = headings.filter(({ depth }) => depth >= 2 && depth <= 3);
   .toc-item--nested .toc-link__text {
     color: color-mix(
       in srgb,
-      rgba(113, 113, 122, 0.74) calc(100% - var(--toc-emphasis) * 100%),
-      #be123c calc(var(--toc-emphasis) * 100%)
+      var(--color-toc-text-nested) calc(100% - var(--toc-emphasis) * 100%),
+      var(--color-accent-ink) calc(var(--toc-emphasis) * 100%)
     );
   }
 

@@ -40,6 +40,16 @@ export interface GiscusOptions {
 
 export type CommentsConfig = false | GiscusOptions;
 
+/** 内置配色方案 */
+export type KomorebiPalette = 'sun' | 'moon';
+
+export interface ResolvedKomorebiPalette {
+  /** 写入 <html data-palette>，对应 palettes.css 中的选择器 */
+  name: KomorebiPalette;
+  /** <meta name="theme-color">，浏览器地址栏颜色 */
+  themeColor: string;
+}
+
 export interface KomorebiThemeOptions {
   title?: string;
   tagline?: string;
@@ -64,6 +74,10 @@ export interface KomorebiThemeOptions {
   customCss?: string[];
   comments?: CommentsConfig;
   labels?: Partial<KomorebiThemeLabels>;
+  /** 配色方案，默认 'sun' */
+  palette?: KomorebiPalette;
+  /** 覆盖 <meta name="theme-color">，默认由 palette 决定 */
+  themeColor?: string;
 }
 
 export interface ResolvedKomorebiThemeOptions {
@@ -90,6 +104,7 @@ export interface ResolvedKomorebiThemeOptions {
   customCss: string[];
   comments: false | GiscusOptions;
   labels: KomorebiThemeLabels;
+  palette: ResolvedKomorebiPalette;
 }
 
 const defaultLabels: KomorebiThemeLabels = {
@@ -131,6 +146,12 @@ export function navLinks(extra?: KomorebiNavLink[]): KomorebiNavLink[] {
     aboutLink(),
   ];
 }
+
+/** 各配色的浏览器 UI 颜色 */
+const paletteThemeColors: Record<KomorebiPalette, string> = {
+  sun: '#f7f2ea',
+  moon: '#17181b',
+};
 
 export function defineConfig(
   options: KomorebiThemeOptions,
@@ -177,6 +198,17 @@ export function resolveThemeOptions(
     customCss: options.customCss ?? [],
     comments: resolveComments(options.comments),
     labels,
+    palette: resolvePalette(options),
+  };
+}
+
+function resolvePalette(
+  options: KomorebiThemeOptions,
+): ResolvedKomorebiPalette {
+  const name = options.palette ?? 'sun';
+  return {
+    name,
+    themeColor: options.themeColor ?? paletteThemeColors[name],
   };
 }
 

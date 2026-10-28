@@ -1,0 +1,356 @@
+/**
+ * 配色定义（palettes）
+ *
+ * 这里定义主题包内可选的**配色方案**，与「主题包」本身区分：
+ *   komorebi-theme  = 主题包
+ *   palette         = 其中的一种配色（sun / moon / …）
+ *
+ * 结构分三层：
+ *   1. --color-*  语义变量    ← 配色作者只改这一层
+ *   2. --colors-* 桥接变量    ← 让 UnoCSS 工具类跟随语义变量
+ *   3. 组件 / unocss.ts        ← 消费 --color-*
+ *
+ * sun 配色的取值与 token 化之前完全一致，视觉零变化。
+ */
+
+/* ════════════════════════════════════════════════════════════
+   sun —— 默认配色（暖米色 + 玫瑰粉）
+   ════════════════════════════════════════════════════════════ */
+
+:root,
+:root[data-palette="sun"] {
+  color-scheme: light;
+
+  /* ── 背景 ── */
+  --color-bg: #f6efe6;
+  --color-bg-from: #fcfaf6;
+  --color-bg-to: #f5efe7;
+  --color-glow-a: rgba(244, 63, 94, 0.16);
+  --color-glow-b: rgba(251, 191, 36, 0.14);
+
+  /* ── 表面 ── */
+  --color-surface: #ffffff;
+  --color-surface-subtle: oklch(98.5% 0 0);
+  --color-surface-glass: rgb(255 255 255 / 0.92);
+  --color-surface-hover: rgb(255 255 255 / 0.38);
+  --color-surface-card: rgb(255 255 255 / 0.5);
+  --color-surface-card-hover: rgb(255 255 255 / 0.7);
+  --color-surface-empty: rgb(255 255 255 / 0.55);
+
+  /* ── 排版（presetTypography 的 --un-prose-*） ── */
+  --prose-body: oklch(37% 0.013 285.805);
+  --prose-headings: oklch(21% 0.006 285.885);
+  --prose-bold: oklch(21% 0.006 285.885);
+  --prose-quotes: oklch(21% 0.006 285.885);
+  --prose-captions: oklch(55.2% 0.016 285.938);
+  --prose-counters: oklch(55.2% 0.016 285.938);
+  --prose-bullets: oklch(87.1% 0.006 286.286);
+  --prose-hr: oklch(92% 0.004 286.32);
+  --prose-code: oklch(21% 0.006 285.885);
+  --prose-kbd: oklch(21% 0.006 285.885);
+  --prose-lead: oklch(44.2% 0.017 285.786);
+  --prose-links: oklch(21% 0.006 285.885);
+
+  /* ── 文字 ── */
+  --color-text: #18181b;
+  --color-text-strong: oklch(14.1% 0.005 285.823);
+  --color-text-emphasis: oklch(37% 0.013 285.805);
+  --color-text-deep: #27272a; /* zinc-800：文章 meta 数值色 */
+  --color-text-subtle-90: rgb(113 113 122 / 0.9); /* zinc-500 @ 90% */
+  --color-text-muted: oklch(44.2% 0.017 285.786);
+  --color-text-subtle: oklch(55.2% 0.016 285.938);
+  --color-text-faint: oklch(70.5% 0.015 286.067);
+  --color-text-ghost: oklch(87.1% 0.006 286.286);
+
+  /* ── 边框 ── */
+  --color-border: oklch(92% 0.004 286.32);
+  --color-border-strong: oklch(87.1% 0.006 286.286);
+  --color-border-contrast: oklch(14.1% 0.005 285.823);
+
+  /* ── 强调色（玫瑰粉） ── */
+  --color-accent: oklch(64.5% 0.246 16.439);
+  --color-accent-bright: oklch(71.2% 0.194 13.428);
+  --color-accent-soft: oklch(94.1% 0.03 12.58);
+  --color-accent-strong: #e11d48;
+  --color-accent-ink: #be123c;
+  --color-selection: rgba(244, 63, 94, 0.18);
+
+  /* ── 正文内容 ── */
+  --color-link: rgb(244 63 94);
+  --color-link-decoration: rgb(254 205 211);
+  --color-quote-bg: rgb(255 241 242 / 0.7);
+  --color-quote-border: rgb(251 113 133);
+  --color-quote-text: rgb(63 63 70);
+  --color-inline-code-bg: rgb(244 244 245);
+  --color-inline-code-text: rgb(225 29 72);
+  --color-blockquote-text: rgb(24 24 27);
+  --color-em-text: rgb(82 82 91);
+  --color-hr: linear-gradient(
+    90deg,
+    rgb(228 228 231),
+    rgb(212 212 216),
+    transparent
+  );
+  --color-img-border: rgb(228 228 231 / 0.7);
+  --color-img-shadow: rgba(15, 23, 42, 0.35);
+  --color-code-border: rgb(228 228 231 / 0.8);
+  --color-code-shadow: rgba(15, 23, 42, 0.22);
+  --color-table-head-bg: rgb(250 250 250 / 0.9);
+  --color-table-cell-bg: rgb(255 255 255 / 0.8);
+  --color-table-border: rgb(228 228 231 / 0.7);
+
+  /* ── 阴影 / 滚动条 ── */
+  --color-shadow: rgba(15, 23, 42, 0.18);
+  --color-shadow-strong: rgba(15, 23, 42, 0.2);
+  --color-scrollbar: rgba(63, 63, 70, 0.18);
+
+  /* ── 草稿标记 ── */
+  --color-draft-bg: oklch(98.7% 0.022 95.277);
+  --color-draft-border: oklch(92.4% 0.12 95.746);
+  --color-draft-text: oklch(55.5% 0.163 48.998);
+
+  /* ── 分页 ── */
+  --color-pagination-text: oklch(55.2% 0.016 285.938);
+  --color-pagination-hover-bg: rgb(255 255 255 / 0.7);
+  --color-pagination-hover-text: oklch(14.1% 0.005 285.823);
+  --color-pagination-active-bg: oklch(14.1% 0.005 285.823);
+  --color-pagination-active-text: #ffffff;
+  --color-pagination-gap: oklch(70.5% 0.015 286.067);
+
+  /* ── 目录（TOC） ── */
+  --color-toc-rail: linear-gradient(
+    180deg,
+    rgba(244, 63, 94, 0.12),
+    rgba(161, 161, 170, 0.2),
+    rgba(251, 191, 36, 0.1)
+  );
+  --color-toc-progress: linear-gradient(
+    90deg,
+    rgba(255, 223, 231, 0.96),
+    rgba(255, 239, 242, 0.72)
+  );
+  --color-toc-indicator: rgba(244, 63, 94, 1);
+  --color-toc-text: rgba(82, 82, 91, 0.8);
+  --color-toc-text-nested: rgba(113, 113, 122, 0.74);
+  --color-toc-hover: #27272a;
+
+  /* ── 上一篇 / 下一篇 ── */
+  --color-nav-glow-prev: linear-gradient(
+    90deg,
+    rgba(244, 63, 94, 0.12) 0%,
+    rgba(244, 63, 94, 0.06) 42%,
+    rgba(244, 63, 94, 0) 100%
+  );
+  --color-nav-glow-next: linear-gradient(
+    270deg,
+    rgba(251, 191, 36, 0.12) 0%,
+    rgba(251, 191, 36, 0.06) 42%,
+    rgba(251, 191, 36, 0) 100%
+  );
+  --color-nav-panel-prev: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.24) 18%,
+    rgba(255, 255, 255, 0.66) 36%,
+    rgba(255, 255, 255, 0.88) calc(var(--edge-width) + 0.35rem),
+    rgba(255, 255, 255, 0.94) 100%
+  );
+  --color-nav-panel-next: linear-gradient(
+    270deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.24) 18%,
+    rgba(255, 255, 255, 0.66) 36%,
+    rgba(255, 255, 255, 0.88) calc(var(--edge-width) + 0.35rem),
+    rgba(255, 255, 255, 0.94) 100%
+  );
+  --color-nav-panel-border: rgba(212, 212, 216, 0.58);
+  --color-nav-panel-border-hover: rgba(212, 212, 216, 0.72);
+  --color-nav-title: rgb(24, 24, 27);
+  --color-nav-title-hover: rgb(225, 29, 72);
+  --color-nav-eyebrow: rgba(113, 113, 122, 0.92);
+
+  /* ── 浏览器 UI ── */
+  --color-theme-ui: #f7f2ea;
+}
+
+/* ════════════════════════════════════════════════════════════
+   桥接层：让 UnoCSS 工具类（text-zinc-950 等）跟随语义变量
+   102 处工具类由此自动生效，无需改动组件模板。
+   ════════════════════════════════════════════════════════════ */
+
+/* 特异性 (0,1,1) 高于 UnoCSS 生成的 :root (0,1,0)，
+   确保桥接生效，不受样式表顺序影响。 */
+html:root {
+  --colors-white: var(--color-surface);
+  --colors-zinc-50: var(--color-surface-subtle);
+  --colors-zinc-200: var(--color-border);
+  --colors-zinc-300: var(--color-border-strong);
+  --colors-zinc-400: var(--color-text-faint);
+  --colors-zinc-500: var(--color-text-subtle);
+  --colors-zinc-600: var(--color-text-muted);
+  --colors-zinc-700: var(--color-text-emphasis);
+  --colors-zinc-800: var(--color-text-deep);
+  --colors-zinc-950: var(--color-text-strong);
+
+  --colors-rose-100: var(--color-accent-soft);
+  --colors-rose-400: var(--color-accent-bright);
+  --colors-rose-500: var(--color-accent);
+
+  --colors-amber-50: var(--color-draft-bg);
+  --colors-amber-200: var(--color-draft-border);
+  --colors-amber-700: var(--color-draft-text);
+}
+
+/* ════════════════════════════════════════════════════════════
+   moon —— 暗黑银白配色（冷银灰 + 粉色强调）
+   ════════════════════════════════════════════════════════════ */
+
+:root[data-palette="moon"] {
+  color-scheme: dark;
+
+  /* ── 背景：冷银深灰 ── */
+  --color-bg: #17181b;
+  --color-bg-from: #1b1c20;
+  --color-bg-to: #131418;
+  --color-glow-a: rgba(200, 208, 220, 0.07);
+  --color-glow-b: rgba(200, 208, 220, 0.05);
+
+  /* ── 表面 ── */
+  --color-surface: #1e2024;
+  --color-surface-subtle: #232529;
+  --color-surface-glass: rgb(30 32 36 / 0.94);
+  --color-surface-hover: rgb(255 255 255 / 0.04);
+  --color-surface-card: rgb(255 255 255 / 0.03);
+  --color-surface-card-hover: rgb(255 255 255 / 0.06);
+  --color-surface-empty: rgb(255 255 255 / 0.04);
+
+  /* ── 排版 ── */
+  --prose-body: #c8ccd2;
+  --prose-headings: #f5f7fa;
+  --prose-bold: #f5f7fa;
+  --prose-quotes: #c8ccd2;
+  --prose-captions: #8a8f97;
+  --prose-counters: #8a8f97;
+  --prose-bullets: #454a53;
+  --prose-hr: #2d3138;
+  --prose-code: #f691cc;
+  --prose-kbd: #f5f7fa;
+  --prose-lead: #a0a5ad;
+  --prose-links: #f691cc;
+
+  /* ── 文字 ── */
+  --color-text: #eef0f3;
+  --color-text-strong: #f5f7fa;
+  --color-text-emphasis: #d8dbe0;
+  --color-text-muted: #c8ccd2;
+  --color-text-subtle: #a0a5ad;
+  --color-text-faint: #6f747c;
+  --color-text-ghost: #454a53;
+  --color-text-deep: #c8ccd2;
+  --color-text-subtle-90: rgb(160 165 173 / 0.9);
+
+  /* ── 边框 ── */
+  --color-border: #2d3138;
+  --color-border-strong: #454a53;
+  --color-border-contrast: #f5f7fa;
+
+  /* ── 强调色：粉色 ── */
+  --color-accent: #f691cc;
+  --color-accent-bright: #f9a8d4;
+  --color-accent-soft: #3d2534;
+  --color-accent-strong: #f9a8d4;
+  --color-accent-ink: #f691cc;
+  --color-selection: rgb(246 145 204 / 0.28);
+
+  /* ── 正文内容 ── */
+  --color-link: #f691cc;
+  --color-link-decoration: rgb(246 145 204 / 0.42);
+  --color-quote-bg: #202227;
+  --color-quote-border: #f691cc;
+  --color-quote-text: #c8ccd2;
+  --color-inline-code-bg: #282a2f;
+  --color-inline-code-text: #f691cc;
+  --color-blockquote-text: #c8ccd2;
+  --color-em-text: #c8ccd2;
+  --color-hr: linear-gradient(90deg, #2d3138, #373b42, transparent);
+  --color-img-border: #2d3138;
+  --color-img-shadow: rgba(0, 0, 0, 0.9);
+  --color-code-border: #2d3138;
+  --color-code-shadow: rgba(0, 0, 0, 0.85);
+  --color-table-head-bg: #26282d;
+  --color-table-cell-bg: #1c1e22;
+  --color-table-border: #2d3138;
+
+  /* ── 阴影 / 滚动条 ── */
+  --color-shadow: rgba(0, 0, 0, 0.85);
+  --color-shadow-strong: rgba(0, 0, 0, 0.9);
+  --color-scrollbar: rgb(255 255 255 / 0.16);
+
+  /* ── 草稿标记 ── */
+  --color-draft-bg: #2b2118;
+  --color-draft-border: #4a3520;
+  --color-draft-text: #e8b87a;
+
+  /* ── 分页 ── */
+  --color-pagination-text: #a0a5ad;
+  --color-pagination-hover-bg: #282a2f;
+  --color-pagination-hover-text: #f5f7fa;
+  --color-pagination-active-bg: #f691cc;
+  --color-pagination-active-text: #17181b;
+  --color-pagination-gap: #64696f;
+
+  /* ── 目录（TOC） ── */
+  --color-toc-rail: linear-gradient(
+    180deg,
+    rgb(246 145 204 / 0.24),
+    #3a3a3a,
+    transparent
+  );
+  --color-toc-progress: linear-gradient(
+    90deg,
+    rgb(246 145 204 / 0.1),
+    rgb(246 145 204 / 0.045)
+  );
+  --color-toc-indicator: rgb(246 145 204);
+  --color-toc-text: #a0a5ad;
+  --color-toc-text-nested: #6f747c;
+  --color-toc-hover: #eef0f3;
+
+  /* ── 上一篇 / 下一篇 ── */
+  --color-nav-glow-prev: linear-gradient(
+    90deg,
+    rgb(246 145 204 / 0.1) 0%,
+    rgb(246 145 204 / 0.05) 42%,
+    transparent 100%
+  );
+  --color-nav-glow-next: linear-gradient(
+    270deg,
+    rgb(200 208 220 / 0.08) 0%,
+    rgb(200 208 220 / 0.04) 42%,
+    transparent 100%
+  );
+  --color-nav-panel-prev: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(30 32 36 / 0.24) 18%,
+    rgb(30 32 36 / 0.66) 36%,
+    rgb(30 32 36 / 0.88) calc(var(--edge-width) + 0.35rem),
+    rgb(30 32 36 / 0.94) 100%
+  );
+  --color-nav-panel-next: linear-gradient(
+    270deg,
+    transparent 0%,
+    rgb(30 32 36 / 0.24) 18%,
+    rgb(30 32 36 / 0.66) 36%,
+    rgb(30 32 36 / 0.88) calc(var(--edge-width) + 0.35rem),
+    rgb(30 32 36 / 0.94) 100%
+  );
+  --color-nav-panel-border: #2d3138;
+  --color-nav-panel-border-hover: #454a53;
+  --color-nav-title: #eef0f3;
+  --color-nav-title-hover: #f691cc;
+  --color-nav-eyebrow: #8a8f97;
+
+  /* ── 浏览器 UI ── */
+  --color-theme-ui: #17181b;
+}

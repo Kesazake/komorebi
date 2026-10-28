@@ -1,12 +1,33 @@
+@import "./palettes.css";
+
 @view-transition {
   navigation: auto;
 }
 
+/* 排版变量桥接：把 palettes.css 的 --prose-* 接到 UnoCSS 的 --un-prose-*。
+   注意：PostBody 用了 .prose-zinc，它会在元素上重定义 --un-prose-*，
+   所以这里必须用 html .prose (0,1,1) 压过 .prose-zinc (0,1,0)。 */
+:root,
+html .prose {
+  --un-prose-body: var(--prose-body);
+  --un-prose-headings: var(--prose-headings);
+  --un-prose-bold: var(--prose-bold);
+  --un-prose-quotes: var(--prose-quotes);
+  --un-prose-captions: var(--prose-captions);
+  --un-prose-counters: var(--prose-counters);
+  --un-prose-bullets: var(--prose-bullets);
+  --un-prose-hr: var(--prose-hr);
+  --un-prose-code: var(--prose-code);
+  --un-prose-kbd: var(--prose-kbd);
+  --un-prose-lead: var(--prose-lead);
+  --un-prose-links: var(--prose-links);
+}
+
+/* 兼容层：保留原有变量名，值来自 palettes.css */
 :root {
-  color-scheme: light;
-  --page-bg: #f6efe6;
-  --text-main: #18181b;
-  --accent-soft: rgba(244, 63, 94, 0.18);
+  --page-bg: var(--color-bg);
+  --text-main: var(--color-text);
+  --accent-soft: var(--color-selection);
 }
 
 * {
@@ -60,5 +81,13 @@ pre {
 
 *::-webkit-scrollbar-thumb {
   border-radius: 999px;
-  background: rgba(63, 63, 70, 0.18);
+  background: var(--color-scrollbar);
+}
+
+/* 背景装饰层：由 Layout.astro 使用 */
+.komorebi-background {
+  background-image:
+    radial-gradient(circle at top left, var(--color-glow-a), transparent 24%),
+    radial-gradient(circle at top right, var(--color-glow-b), transparent 22%),
+    linear-gradient(180deg, var(--color-bg-from), var(--color-bg-to));
 }

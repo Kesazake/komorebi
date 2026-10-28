@@ -95,7 +95,7 @@ const updatedLabel = updatedDate ? formatDate(updatedDate) : undefined;
     row-gap: 0.25rem;
     font-size: 0.75rem;
     line-height: 1.25rem;
-    color: rgb(113 113 122 / 0.9);
+    color: var(--color-text-subtle-90);
   }
 
   .post-meta__item {
@@ -105,17 +105,17 @@ const updatedLabel = updatedDate ? formatDate(updatedDate) : undefined;
   }
 
   .post-meta__label {
-    color: rgb(161 161 170);
+    color: var(--color-text-faint);
   }
 
   .post-meta__value {
     font-weight: 500;
-    color: rgb(39 39 42);
+    color: var(--color-text-deep);
   }
 
   .post-meta__item--emphasis {
     font-weight: 500;
-    color: rgb(39 39 42);
+    color: var(--color-text-deep);
   }
 
   @media (min-width: 640px) {
@@ -130,12 +130,12 @@ const updatedLabel = updatedDate ? formatDate(updatedDate) : undefined;
     }
 
     .post-meta__label {
-      color: rgb(113 113 122 / 0.9);
+      color: var(--color-text-subtle-90);
     }
 
     .post-meta__item--emphasis {
       font-weight: 400;
-      color: rgb(113 113 122 / 0.9);
+      color: var(--color-text-subtle-90);
     }
   }
 </style>
