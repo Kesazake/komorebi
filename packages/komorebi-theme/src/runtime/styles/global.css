@@ -222,8 +222,6 @@ html:root[data-palette="moon"] body .prose pre.astro-code span {
   font-size: 0.875rem;
   line-height: 1.5rem;
   border-radius: 0.75rem;
-  /* 给右上角标签/按钮让位 */
-  padding-top: 1rem;
 }
 
 /* ── 行号 ── */
@@ -243,6 +241,15 @@ html:root[data-palette="moon"] body .prose pre.astro-code span {
   padding-left: 2.6rem;
   box-sizing: border-box;
   vertical-align: top;
+}
+
+/* 首行末尾留出空白，让右上角的语言标签不压住代码文字。
+   仿 expressive-code：
+     :nth-child(1 of .ec-line) .code { padding-inline-end: calc(2rem + codePadInl) }
+   只在首行加，块顶部因此无需额外留白；
+   超长行仍会横向滚动，滚动到末尾就能看清结尾。 */
+.code-block pre > code > .line:first-child {
+  padding-right: 3.35rem;
 }
 
 /* 行号：每行自己递增计数 */
