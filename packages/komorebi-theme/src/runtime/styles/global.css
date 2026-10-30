@@ -158,6 +158,28 @@ html:root[data-palette="moon"] body .prose pre.astro-code span {
 }
 
 /* ────────────────────────────────────────────────────────────
+   图片图注（由 markdown/figure.ts 插件生成）
+   把 Markdown 的 alt 渲染为图片下方的说明文字
+   ──────────────────────────────────────────────────────────── */
+
+.prose figure {
+  margin-block: 2rem;
+}
+
+/* figure 内的图片不再叠加外间距，由 figure 统一控制 */
+.prose figure img {
+  margin-block: 0;
+}
+
+.prose figcaption {
+  margin-top: 0.75rem;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--color-text-subtle);
+  text-align: center;
+}
+
+/* ────────────────────────────────────────────────────────────
    正文图片高度上限的渐进增强
    svh（small viewport height）取移动端地址栏展开时的视口高度，
    避免滚动时图片高度随地址栏伸缩抖动。不支持的浏览器忽略此行。
