@@ -1,0 +1,64 @@
+---
+/**
+ * 代码块复制按钮的运行时逻辑
+ *
+ * 按钮本身由 markdown/code-enhance.ts 在构建期注入，
+ * 这里只负责点击行为，保证 SSR 时按钮已存在、不会闪烁。
+ *
+ * 复制失败时的降级：navigator.clipboard 只在安全上下文
+ * （https 或 localhost）可用，否则退回 textarea + execCommand。
+ */
+---
+
+<script is:inline data-astro-rerun>
+  (() => {
+    async function copyText(text) {
+      try {
+        if (navigator.clipboard?.writeText) {
+          await navigator.clipboard.writeText(text);
+          return true;
+        }
+      } catch {
+        /* 继续走降级方案 */
+      }
+
+      // 降级：临时 textarea + execCommand
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.cssText = 'position:fixed;top:-9999px;opacity:0';
+        document.body.appendChild(ta);
+        ta.select();
+        const ok = document.execCommand('copy');
+        document.body.removeChild(ta);
+        return ok;
+      } catch {
+        return false;
+      }
+    }
+
+    for (const btn of document.querySelectorAll('[data-copy-code]')) {
+      if (btn.dataset.bound === 'true') continue;
+      btn.dataset.bound = 'true';
+
+      btn.addEventListener('click', async () => {
+        const block = btn.closest('.code-block');
+        const code = block?.querySelector('pre code');
+        if (!code) return;
+
+        const ok = await copyText(code.textContent ?? '');
+
+        btn.dataset.copied = ok ? 'true' : 'false';
+        btn.setAttribute('aria-label', ok ? '已复制' : '复制失败');
+
+        // 1.5 秒后恢复初始状态
+        clearTimeout(btn._copyTimer);
+        btn._copyTimer = setTimeout(() => {
+          btn.dataset.copied = 'false';
+          btn.setAttribute('aria-label', '复制代码');
+        }, 1500);
+      });
+    }
+  })();
+</script>

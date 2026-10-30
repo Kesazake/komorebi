@@ -16,6 +16,7 @@ import { parseFragment } from 'parse5';
 import type { ViteDevServer } from 'vite';
 import pkg from '../package.json' with { type: 'json' };
 import { createRecoveryConfigLoader } from './config-loader';
+import codeEnhance from './markdown/code-enhance';
 import figurePlugin from './markdown/figure';
 import {
   aboutLink,
@@ -226,7 +227,9 @@ export default function komorebi(
           ],
           markdown: {
             // Sätteri 处理器 + 自定义 hast 插件（图片转 figure/figcaption）
-            processor: satteri({ hastPlugins: [figurePlugin()] }),
+            processor: satteri({
+              hastPlugins: [figurePlugin(), codeEnhance()],
+            }),
             // 双主题输出：每个 token 同时带 --shiki-light / --shiki-dark，
             // 由 global.css 按 <html data-palette> 选择使用哪一组。
             // shiki 的颜色写在内联 style 上，无法用普通 CSS 变量覆盖。
