@@ -31,6 +31,20 @@ interface HastTextLike {
   value: string;
 }
 
+/**
+ * 取元素的 class 列表。
+ *
+ * hast 里 class 可能以 `class` 或 `className` 存放，值可能是字符串、
+ * 数组或逗号分隔的字符串，这里统一拆成数组。
+ */
+function getClasses(node: HastElementLike): string[] {
+  const raw = node.properties?.class ?? node.properties?.className;
+  if (Array.isArray(raw)) return raw.map(String);
+  return String(raw ?? '')
+    .split(/[\s,]+/)
+    .filter(Boolean);
+}
+
 function isElement(node: unknown): node is HastElementLike {
   return (
     typeof node === 'object' &&
@@ -39,26 +53,21 @@ function isElement(node: unknown): node is HastElementLike {
   );
 }
 
-/** 统计代码块的行数：遍历所有 text 节点，累加换行符 */
-function countLines(node: HastElementLike): number {
+/**
+ * 统计代码块的行数。
+ *
+ * 优先数 span.line 的个数——shiki 每一行输出一个 span.line，
+ * 这是最可靠的依据；数文本节点里的换行符会受换行节点是否已清理影响。
+ */
+function countLines(pre: HastElementLike): number {
   let lines = 0;
   const walk = (n: unknown) => {
-    if (!isElement(n)) {
-      if (
-        typeof n === 'object' &&
-        n !== null &&
-        (n as { type?: string }).type === 'text'
-      ) {
-        const value = String((n as HastTextLike).value ?? '');
-        lines += value.split('\n').length - 1;
-      }
-      return;
-    }
+    if (!isElement(n)) return;
+    if (getClasses(n).includes('line')) lines += 1;
     for (const child of n.children) walk(child);
   };
-  walk(node);
-  // 至少一行
-  return Math.max(1, lines + 1);
+  walk(pre);
+  return Math.max(1, lines);
 }
 
 /** 复制按钮 */
@@ -172,6 +181,39 @@ function wrapCollapsible(pre: HastElementLike): HastElementLike {
   };
 }
 
+/**
+ * 复制节点树，丢弃 span.line 之间夹着的纯换行文本节点。
+ *
+ * shiki 输出形如：<span class="line">…</span>\n<span class="line">…</span>
+ * 这些 \n 是普通文本节点，一旦把 .line 设为 display:block，
+ * 它们就会各自撑出一个空行，行距翻倍。
+ *
+ * satteri 传入的节点是只读的，不能就地修改，
+ * 因此在这里构造一棵过滤后的新树，交给 ctx.replaceNode。
+ */
+function cloneWithoutLineBreaks(node: unknown): unknown {
+  if (Array.isArray(node)) return node.map(cloneWithoutLineBreaks);
+  if (!isElement(node)) return node;
+
+  const children: unknown[] = [];
+  for (const child of node.children) {
+    const isBlankText =
+      typeof child === 'object' &&
+      child !== null &&
+      (child as { type?: string }).type === 'text' &&
+      /^\s*\n\s*$/.test(String((child as HastTextLike).value ?? ''));
+    if (isBlankText) continue;
+    children.push(cloneWithoutLineBreaks(child));
+  }
+
+  return {
+    type: 'element',
+    tagName: node.tagName,
+    properties: { ...node.properties },
+    children,
+  };
+}
+
 export default function codeEnhance() {
   return defineHastPlugin({
     name: 'komorebi:code-enhance',
@@ -180,25 +222,28 @@ export default function codeEnhance() {
       visit(node, ctx) {
         if (!isElement(node)) return;
 
-        const classes = node.properties?.class;
-        const classList = Array.isArray(classes)
-          ? classes.map(String)
-          : String(classes ?? '').split(/\s+/);
-        if (!classList.includes('astro-code')) return;
+        if (!getClasses(node).includes('astro-code')) return;
+
+        // span.line 之间的换行节点在 display:block 下会撑出空行，重建时清掉
+        const pre = cloneWithoutLineBreaks(node) as HastElementLike;
 
         // 在代码块内部包一层容器，便于定位复制按钮
-        const lineCount = countLines(node);
+        const lineCount = countLines(pre);
         const needsCollapse = lineCount > LINE_THRESHOLD;
 
+        // 语言标签要定位在代码块右侧的留白条里，
+        // 那儿在滚动容器之外，所以把语言名提到外层容器上。
+        const lang = pre.properties?.['data-language'];
         const wrapper: HastElementLike = {
           type: 'element',
           tagName: 'div',
           properties: {
             class: 'code-block',
             'data-line-count': String(lineCount),
+            ...(lang ? { 'data-language': String(lang) } : {}),
           },
           children: [
-            needsCollapse ? wrapCollapsible(node) : node,
+            needsCollapse ? wrapCollapsible(pre) : pre,
             createCopyButton(),
           ],
         };
