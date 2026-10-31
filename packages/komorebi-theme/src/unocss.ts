@@ -53,8 +53,8 @@ export function createKomorebiUnoOptions(
             color: 'var(--color-em-text)',
           },
           blockquote: {
-            'margin-top': '2rem',
-            'margin-bottom': '2rem',
+            'margin-top': '1.6rem',
+            'margin-bottom': '1.6rem',
             'border-inline-start-width': '4px',
             'border-inline-start-color': 'var(--color-quote-border)',
             'border-radius': '0 24px 24px 0',
@@ -65,8 +65,24 @@ export function createKomorebiUnoOptions(
             color: 'var(--color-quote-text)',
             quotes: 'none',
           },
+          // 嵌套引用：去掉背景与圆角，只留一条细竖线表示层级，
+          // 否则内外两层会叠加出两块背景和一粗一细两条并列的竖线。
+          'blockquote blockquote': {
+            margin: '1rem 0 0',
+            padding: '0 0 0 1rem',
+            background: 'none',
+            'border-inline-start-width': '2px',
+            'border-radius': '0',
+          },
+          // 引用块内的段落之间留出间距，首尾段不额外留白
           'blockquote p': {
-            margin: '0',
+            margin: '0.75rem 0',
+          },
+          'blockquote > p:first-child': {
+            'margin-top': '0',
+          },
+          'blockquote > p:last-child': {
+            'margin-bottom': '0',
           },
           'blockquote p:first-of-type::before': {
             content: 'none',
